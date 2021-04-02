@@ -1,3 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --black: #282c34;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +18,52 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.bg-black{
+  background-color: #181818;
+}
+
+/* Buttons */
+.btn{
+  @apply py-2 px-4 font-semibold rounded-lg shadow-md;
+}
+.btn-danger{
+  @apply text-white bg-red-500 hover:bg-red-700;
+}
+.btn-info {
+  @apply text-white bg-blue-500 hover:bg-blue-700;
+}
+/* Cards Students */
+.input-data{
+  @apply block px-4 py-2 bg-white rounded border-gray-700;
+}
+.item-data{
+  @apply input-data;
+}
+.student-card{
+  @apply flex flex-col justify-around p-4 bg-gray-700;
+}
+
+/* flip create student card */
+.box-rotate{
+  @apply p-4;
+  transition: all 1s;
+  transform-style:preserve-3d;
+}
+.box-rotate-face-template{
+  @apply flex w-full h-full bg-gray-800;
+}
+.box-rotate-front{
+  transform:translateZ(.1px);
+  @apply box-rotate-face-template;
+}
+.box-rotate-back{
+  @apply box-rotate-face-template p-4 justify-around flex-col;
+  transform: translateY(-100%) rotateY(-180deg);
+}
+.pill-button{
+  @apply rounded-full text-2xl;
+}
+.box-rotate-flip{
+  transform:rotateY(-180deg);
 }
