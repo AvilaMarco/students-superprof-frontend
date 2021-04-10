@@ -10,11 +10,11 @@ const fetchData = (link, option = { method: "GET" }) =>
 
 // const getStudents = () => fetchData("/users");
 const getStudents = () => fetchData("/students");
-const getStudent = (id) => fetchData(`/users/${id}`);
+const getStudent = (id) => fetchData(`/student/${id}`);
 
-const deleteStudent = (id) => fetchData(`/users/${id}`, { method: "DELETE" });
+const deleteStudent = (id) => fetchData(`/delete/${id}`, { method: "DELETE" });
 
-const createStudent = (option) => fetchData(`/users`, option);
+const createStudent = (option) => fetchData(`/create`, option);
 
 const requestFetch = (method, body) => ({
   method,
