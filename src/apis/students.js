@@ -1,5 +1,5 @@
-// const API = "https://superprof-students.herokuapp.com";
-const API = "http://localhost:9000";
+const API = "https://superprof-students.herokuapp.com";
+// const API = "http://localhost:9000";
 const RESOURCES = "/student";
 // const API = "https://jsonplaceholder.typicode.com";
 const DRIVE =
