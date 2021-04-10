@@ -5,7 +5,7 @@ const DRIVE =
   "https://drive.google.com/drive/u/1/folders/19HUQfCl7t7HV1GKOArywLpvcI2yJHeSq";
 const MEET = "https://meet.google.com/landing?authuser=1";
 
-const fetchData = (link, option = { method: "GET" }) =>
+const fetchData = (link, option = { mode: "no-cors", method: "GET" }) =>
   fetch(`${API}${RESOURCES}${link}`, option).then((res) => res.json());
 
 // const getStudents = () => fetchData("/users");
@@ -18,6 +18,7 @@ const createStudent = (option) => fetchData(`/users`, option);
 
 const requestFetch = (method, body) => ({
   method,
+  mode: "no-cors",
   body: JSON.stringify(body),
   headers: {
     "Content-type": "application/json; charset=UTF-8",
