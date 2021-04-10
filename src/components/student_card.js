@@ -3,12 +3,13 @@ import swal from "sweetalert";
 import { Link } from "react-router-dom";
 import {deleteStudent} from "../apis/students";
 
-const StudentCard = ({ student, toggleFaceCard, copyClipBoard }) => {
-  const { id, name, email, phone, drive, meet } = student;
+const StudentCard = ({ student, toggleFaceCard, copyClipBoard, updateStudents }) => {
+  const { id, name, email, cellphone, drive, meet } = student;
 
-  function Delete(){
-    deleteStudent(id).then(() => swal("Student Delete"))
-
+  async function Delete(){
+    const message = await deleteStudent(id)
+    await swal(message.msg);
+    await updateStudents()
   }
 
   return (
@@ -33,10 +34,10 @@ const StudentCard = ({ student, toggleFaceCard, copyClipBoard }) => {
         </p>
         <p
           className={"item-data copy"}
-          data-phone={phone}
+          data-phone={cellphone}
           onClick={copyClipBoard}
         >
-          {phone || "1161862698"}
+          {cellphone || "1161862698"}
         </p>
         <a
           className={"item-data bg-meet text-white"}

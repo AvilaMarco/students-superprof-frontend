@@ -16,11 +16,15 @@ const App = () => {
     return () => (mounted = false);
   }, []);
 
+  function updateStudents(){
+    getStudents().then((students) => setStudents(students))
+  }
+
   return (
     <Router>
       <div className="main-container">
         <nav className={"flex justify-between bg-black p-2"}>
-          <Link to={"/users"} className={"btn btn-info"}>
+          <Link to={"/"} className={"btn btn-info"}>
             Users
           </Link>
         </nav>
@@ -29,7 +33,7 @@ const App = () => {
             <Student/>
           </Route>
           <Route path="/">
-            <Students students={students}/>
+            <Students students={students} update={updateStudents}/>
           </Route>
         </Switch>
       </div>

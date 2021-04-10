@@ -2,7 +2,7 @@ import React from "react";
 import swal from "sweetalert";
 import { createStudent, requestFetch, DRIVE, MEET } from "../apis/students";
 
-const StudentCreateCard = (props) => {
+const StudentCreateCard = ({toggleFaceCard, updateStudents}) => {
   function dataStudent(e) {
     e.preventDefault();
     const entries = [...document.querySelectorAll("input")];
@@ -11,11 +11,16 @@ const StudentCreateCard = (props) => {
       return student;
     }, {});
     if (entries.some(({ value }) => value === "")) return;
-    createStudent(requestFetch("POST", student)).then(() => {
-      document.getElementById("create-student").reset();
+    createStudent(requestFetch("POST", student)).then((message) => {
+      resetFom();
       document.getElementById("btn-toggle").click();
-      swal("Create Student");
+      swal(message.msg).then(() => updateStudents())
     });
+  }
+
+  function resetFom(){
+    const entries = [...document.querySelectorAll("input")];
+    entries.forEach(input => input.value = "");
   }
 
   return (
@@ -24,7 +29,7 @@ const StudentCreateCard = (props) => {
         <i
           className="fas fa-plus-circle fa-7x text-white"
           data-id={"student-create"}
-          onClick={props.toggleFaceCard}
+          onClick={toggleFaceCard}
         />
       </div>
       <div id={"create-student"} className={"box-rotate-back"}>
@@ -76,7 +81,7 @@ const StudentCreateCard = (props) => {
             id={"btn-toggle"}
             className={"btn btn-danger"}
             data-id={"student-create"}
-            onClick={props.toggleFaceCard}
+            onClick={toggleFaceCard}
           >
             Cancel
           </button>

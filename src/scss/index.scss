@@ -17,6 +17,9 @@
 .input-data {
   @apply block px-4 py-2 bg-white rounded border-gray-700 text-center;
 }
+textarea.input-data{
+  @apply text-left;
+}
 .item-data {
   @apply input-data;
 }
