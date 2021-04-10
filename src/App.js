@@ -1,37 +1,40 @@
-import logo from './logo.svg';
-import React from "react"
-import './App.css';
+import React, { useState, useEffect } from "react";
 import "./components/student_card";
-import StudentCard from "./components/student_card";
-import StudentCreateCard from "./components/student_create_card";
+import { getStudents } from "./apis/students";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Students from "./views/students";
+import Student from "./views/student";
 
-class App extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            students:[]
-        }
-    }
+const App = () => {
+  const [students, setStudents] = useState([]);
 
-    toggleFlipContent({target}) {
-        document.getElementById(target.dataset.id).classList.toggle("box-rotate-flip")
-    }
+  useEffect(() => {
+    let mounted = true;
+    getStudents().then((students) => {
+      if (mounted) setStudents(students);
+    });
+    return () => (mounted = false);
+  }, []);
 
-    async setStudents(){
-        const students = await fetch("").then(e => e.json()).then(j => j);
-        console.log(students);
-    }
-
-    render(){
-        return (
-            <div className="App bg-black">
-                <main className={"min-h-screen grid grid-cols-5 grid-rows-2 gap-2"}>
-                    <StudentCard toggleFaceCard={this.toggleFlipContent}/>
-                    <StudentCreateCard toggleFaceCard={this.toggleFlipContent}/>
-                </main>
-            </div>
-        )
-    }
-}
+  return (
+    <Router>
+      <div className="main-container">
+        <nav className={"flex justify-between bg-black p-2"}>
+          <Link to={"/users"} className={"btn btn-info"}>
+            Users
+          </Link>
+        </nav>
+        <Switch>
+          <Route path="/users/:id" exact>
+            <Student/>
+          </Route>
+          <Route path="/">
+            <Students students={students}/>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
+};
 
 export default App;

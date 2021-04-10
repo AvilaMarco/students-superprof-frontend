@@ -1,0 +1,36 @@
+.main-container {
+  min-height: 100vh;
+  background-color: var(--black);
+  display: flex;
+  flex-direction: column;
+}
+.container-students {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-auto-rows: 500px;
+  justify-items: center;
+  align-items: center;
+}
+.container-student {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr;
+  flex-grow: 1;
+  height: 10px;
+}
+.student-list-data {
+  & {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .list-scroll {
+    overflow-y: auto;
+    flex: 1 0 0;
+  }
+}

@@ -1,29 +1,82 @@
-import React from 'react';
+import React from "react";
+import swal from "sweetalert";
+import { Link } from "react-router-dom";
+import {deleteStudent} from "../apis/students";
 
-class StudentCard extends React.Component{
-    render(){
-        return (
-        <div className={"box-rotate p-4"} id={"student-card"}>
-            <div className={"box-rotate-front"}>
-                <div className={"student-card h-full"}>
-                    <h1 className={"item-data"}>Name Student</h1>
-                    <p className={"item-data"}>Email@student.com</p>
-                    <p className={"item-data"}>1161862698</p>
-                    <a  className={"item-data"} href="#">Google Meet</a>
-                    <a  className={"item-data"} href="#">Google Drive</a>
-                    <div className={"flex justify-between"}>
-                        <button className={"btn btn-info"}>Complete Information</button>
-                        <button className={"btn btn-info"} data-id={"student-card"} onClick={this.props.toggleFaceCard}>Options</button>
-                    </div>
-                </div>
-            </div>
-            <div className={"box-rotate-back"}>
-                <button className={"btn btn-info"}>Edit</button>
-                <button className={"btn btn-info"}>Delete</button>
-                <button className={"btn btn-info"} data-id={"student-card"} onClick={this.props.toggleFaceCard}>Info Student</button>
-            </div>
+const StudentCard = ({ student, toggleFaceCard, copyClipBoard }) => {
+  const { id, name, email, phone, drive, meet } = student;
+
+  function Delete(){
+    deleteStudent(id).then(() => swal("Student Delete"))
+
+  }
+
+  return (
+    <div className={"box-rotate p-4"} id={id}>
+      <div className={"box-rotate-front justify-center items-center"}>
+        <div className={"user-face"}>
+          <i
+            className="fas fa-user-circle fa-7x"
+            data-id={id}
+            onClick={toggleFaceCard}
+          />
+          <h2 className={"p-2"}>{name}</h2>
         </div>
-    )}
-}
+      </div>
+      <div className={"box-rotate-back justify-between"}>
+        <p
+          className={"item-data copy"}
+          data-email={email}
+          onClick={copyClipBoard}
+        >
+          {email}
+        </p>
+        <p
+          className={"item-data copy"}
+          data-phone={phone}
+          onClick={copyClipBoard}
+        >
+          {phone || "1161862698"}
+        </p>
+        <a
+          className={"item-data bg-meet text-white"}
+          href={meet}
+          target={"_blank"}
+          rel={"noreferrer"}
+        >
+          <i className="fas fa-video" /> Google Meet
+        </a>
+        <a
+          className={"item-data bg-drive text-white"}
+          href={drive}
+          target={"_blank"}
+          rel={"noreferrer"}
+        >
+          <i className="fab fa-google-drive" /> Google Drive
+        </a>
+
+        <div className={"flex bnt-group"}>
+          <button className={"btn btn-warning flex-1"}>Edit</button>
+          <button
+              className={"btn btn-danger flex-1"}
+              onClick={Delete}
+          >
+            Delete
+          </button>
+        </div>
+        <div className={"flex justify-between"}>
+          <Link className={"btn btn-info"} to={`users/${id}`}>
+            <i className="fas fa-address-card" /> Information
+          </Link>
+          <i
+            className="fas fa-undo-alt fa-2x text-green-600"
+            data-id={id}
+            onClick={toggleFaceCard}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default StudentCard;

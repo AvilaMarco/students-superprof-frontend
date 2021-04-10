@@ -1,34 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --black: #282c34;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "JetBrains Mono", monospace;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
-.main-container {
-  min-height: 100vh;
-  background-color: var(--black);
-}
-.container-student {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  grid-auto-rows: 500px;
-  justify-items: center;
-  align-items: center;
-}
+@use 'base';
+@use 'layout';
 /* Buttons */
 .btn {
   @apply py-2 px-3 font-semibold rounded-lg shadow-md text-white;
@@ -52,7 +23,7 @@ code {
 .copy {
   transition: all 2s;
   user-select: all;
-  cursor: url("icons/copy.ico"), auto;
+  cursor: url("../icons/copy.ico"), auto;
 }
 .copy::selection {
   color: white;
