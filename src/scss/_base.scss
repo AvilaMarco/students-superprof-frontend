@@ -5,7 +5,9 @@
 :root {
   --black: #282c34;
 }
-
+*:focus{
+  outline: none;
+}
 body {
   margin: 0;
   padding: 0;

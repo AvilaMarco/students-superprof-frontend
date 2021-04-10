@@ -1,13 +1,15 @@
-//const API = "https://superprof-students.herokuapp.com";
-const API = "https://jsonplaceholder.typicode.com";
+const API = "https://superprof-students.herokuapp.com";
+const RESOURCES = "/student";
+// const API = "https://jsonplaceholder.typicode.com";
 const DRIVE =
   "https://drive.google.com/drive/u/1/folders/19HUQfCl7t7HV1GKOArywLpvcI2yJHeSq";
 const MEET = "https://meet.google.com/landing?authuser=1";
 
 const fetchData = (link, option = { method: "GET" }) =>
-  fetch(`${API}${link}`, option).then((res) => res.json());
+  fetch(`${API}${RESOURCES}${link}`, option).then((res) => res.json());
 
-const getStudents = () => fetchData("/users");
+// const getStudents = () => fetchData("/users");
+const getStudents = () => fetchData("/students");
 const getStudent = (id) => fetchData(`/users/${id}`);
 
 const deleteStudent = (id) => fetchData(`/users/${id}`, { method: "DELETE" });
